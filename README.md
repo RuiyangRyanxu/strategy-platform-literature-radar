@@ -2,6 +2,8 @@
 
 GitHub Pages 静态发布仓库。公开页面位于 `site/`，内容由上级工作区的日报生成器同步。
 
+公开网站：https://ruiyangryanxu.github.io/strategy-platform-literature-radar/
+
 公开归档从 `2026-07-14` 开始，只包含通过现行期刊白名单和日期核验规则的报告。
 
 ## 更新公开文件
