@@ -62,15 +62,6 @@
     }
     .open-latest:hover, .primary-link:hover, .search-button:hover { background: #10564f; }
     button:disabled, select:disabled { cursor: not-allowed; opacity: .55; }
-    .archive-list { margin-top: 22px; border-top: 1px solid var(--line); }
-    .archive-row {
-      width: 100%; display: grid; grid-template-columns: 140px 1fr auto; gap: 20px; align-items: center;
-      min-height: 76px; padding: 14px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer;
-    }
-    .archive-row:hover .archive-action { color: var(--coral); }
-    .archive-date { font-weight: 760; font-variant-numeric: tabular-nums; }
-    .archive-summary { color: var(--muted); }
-    .archive-action { color: var(--blue); font-weight: 700; }
     .search-area { margin-top: 38px; padding-top: 30px; border-top: 1px solid var(--line); }
     .search-area h3 { margin: 0 0 14px; font-size: 19px; }
     .search-control { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; max-width: 760px; }
@@ -91,8 +82,6 @@
     .scope-block h3 { margin: 0 0 8px; font-size: 17px; }
     .scope-block p { margin: 0; color: var(--muted); }
     .notice { padding: 18px 20px; border-left: 4px solid var(--gold); background: #fff7df; border-radius: 5px; color: #594713; }
-    .empty-state { padding: 28px 0; display: grid; gap: 4px; color: var(--muted); }
-    .empty-state strong { color: var(--ink); }
     footer { padding: 28px 18px 48px; text-align: center; color: var(--muted); font-size: 13px; }
     dialog {
       width: min(780px, calc(100% - 30px)); max-height: calc(100vh - 40px); padding: 0; overflow: auto;
@@ -123,9 +112,6 @@
       .date-control .open-latest { grid-column: 1 / -1; }
       .search-control { grid-template-columns: 1fr; }
       .scope-grid, .chart-grid { grid-template-columns: 1fr; }
-      .archive-row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 17px 0; }
-      .archive-summary { grid-column: 1 / -1; }
-      .archive-action { grid-column: 2; grid-row: 1; }
       .dialog-head, .dialog-body { padding-left: 19px; padding-right: 19px; }
     }
   </style>
@@ -155,18 +141,6 @@
           <label class="date-field"><span>月</span><select id="report-month" aria-label="选择报告月份"></select></label>
           <label class="date-field"><span>日</span><select id="report-day" aria-label="选择报告日期"></select></label>
           <button class="open-latest" id="open-distribution" type="button">查看分布</button>
-        </div>
-        <div class="archive-list" id="archive-list">
-          <button class="archive-row" type="button" data-report-date="2026-07-15">
-              <span class="archive-date">2026-07-15</span>
-              <span class="archive-summary">11 篇 · MS 5 · ISR 1 · arXiv 5</span>
-              <span class="archive-action" aria-hidden="true">查看分布 ›</span>
-            </button>
-          <button class="archive-row" type="button" data-report-date="2026-07-14">
-              <span class="archive-date">2026-07-14</span>
-              <span class="archive-summary">11 篇 · ISR 5 · MS 2 · arXiv 4</span>
-              <span class="archive-action" aria-hidden="true">查看分布 ›</span>
-            </button>
         </div>
         <div class="search-area">
           <h3>检索论文</h3>
@@ -375,12 +349,6 @@
     document.getElementById('open-distribution').addEventListener('click', () => {
       const value = selectedDate();
       if (value) openReport(value);
-    });
-    document.querySelectorAll('[data-report-date]').forEach(button => {
-      button.addEventListener('click', () => {
-        setSelectedDate(button.dataset.reportDate);
-        openReport(button.dataset.reportDate);
-      });
     });
     document.getElementById('search-form').addEventListener('submit', event => {
       event.preventDefault();
